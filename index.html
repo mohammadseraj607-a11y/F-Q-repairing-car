@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>F&Q - Car Repair Q&A</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">F&Q</div>                
+      <div>
+        <div class="brand-title">Car Repair FAQ Q&A</div>                            
+        <div class="brand-sub">Fast answers using a tiny on-page ML-like ranker</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnClear" class="ghost">Clear</button>
+      <button id="btnAbout" class="ghost">About</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel hero">
+      <div class="hero-left">
+        <h1>Ask about car repairs</h1>
+        <p>
+          Type a question (e.g., “car won’t start after replacing battery”, “brake squeal at low speed”),
+          choose a category, and get helpful FAQ-style answers.
+        </p>
+        <div class="chips" id="categoryChips" aria-label="Categories"></div>
+      </div>
+
+      <div class="hero-right">
+        <label class="label" for="categorySelect">Category</label>
+        <select id="categorySelect" class="select" aria-label="Category select"></select>
+
+        <label class="label" for="query">Your question</label>
+        <textarea id="query" class="textarea" rows="3" placeholder="Describe the issue..." spellcheck="false"></textarea>
+
+        <div class="actions">
+          <button id="btnAsk" class="primary">Get Answer</button>
+          <button id="btnDemo" class="secondary">Try Demo</button>
+          <button id="btnAddOptions" class="ghost" type="button" title="Show more example questions">More Options</button>
+        </div>
+
+        <div class="option-row" id="optionRow" aria-live="polite">
+          <div class="option-label">
+            <span class="option-title">Quick examples</span>
+            <span class="option-sub">Click one to fill the question</span>
+          </div>
+          <div class="option-chips" id="optionChips"></div>
+        </div>
+
+
+        <div id="answer" class="answer" aria-live="polite"></div>
+        <div class="hint">
+          Note: This is an educational helper, not a substitute for a professional diagnosis.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">FAQ Browser</h2>
+          <p class="muted">Filter and expand common repair topics.</p>
+        </div>
+        <div class="search">
+          <input id="faqSearch" type="search" class="input" placeholder="Search FAQs..." />
+        </div>
+      </div>
+
+      <div class="faq-grid" id="faqGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Built with HTML/CSS/JS • Local “ML-like” ranking (no network)</span>
+  </footer>
+
+  <dialog id="aboutDialog" class="dialog">
+    <form method="dialog" class="dialog-inner">
+      <h3>How the “ML” works (local)</h3>
+      <p class="muted">
+        This page uses a tiny TF-IDF + token matching ranker to select the most relevant FAQ entry.
+        It’s ML-inspired (vector similarity), but runs fully in your browser.
+      </p>
+      <ul class="list">
+        <li>Questions are broken into tokens.</li>
+        <li>Each FAQ has a simple TF-IDF vector.</li>
+        <li>User input is vectorized and scored by cosine similarity.</li>
+        <li>Top match becomes the answer template.</li>
+      </ul>
+      <div class="dialog-actions">
+        <button class="primary" value="close">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
